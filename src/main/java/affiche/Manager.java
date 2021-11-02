@@ -1,58 +1,49 @@
 package affiche;
 
 
-import org.jetbrains.annotations.NotNull;
-
 public class Manager {
     int countForFeed = 10;
 
-    public Manager(int countForFeed) {
-        this.countForFeed = 10;
-    }
-
     public Manager() {
+    }
+
+
+    public Manager(int countForFeed) {
+        this.countForFeed = countForFeed;
 
     }
 
-    public String[] addFilm() {
 
+    private Movie[] movies = new Movie[0];
 
-        String[] films = {
-                "Bloodshot",
-                "Forward",
-                "Hotel <Belgrad>",
-                "Gentlemen",
-                "Invisible man",
-                "Trolls. Worldwide tour",
-                "Number One"
-
-        };
-        String newFilm = "Road";
-        String[] filmAdd = new String[films.length + 1];
-        for (int i = 0; i < films.length; i++) {
-            filmAdd[i] = films[i];
-        }
-        filmAdd[filmAdd.length - 1] = newFilm;
-        films = filmAdd;
-        return films;
+    public void add(Movie film) {
+        int length = movies.length + 1;
+        Movie[] tmp = new Movie[length];
+        System.arraycopy(movies, 0, tmp, 0, movies.length);
+        int lastIndex = tmp.length - 1;
+        tmp[lastIndex] = film;
+        movies = tmp;
     }
-        public String[] feedFilms(String [] films) {
 
-        int resultLength = 0;
+    public Movie[] getAll() {
+        Movie[] movies = findAll();
+        Movie[] result = countForFeed < movies.length ? new Movie[countForFeed] : new Movie[findAll().length];
 
-
-        if (countForFeed > films.length) {
-            resultLength = countForFeed;
-        }
-        String[] feedFilms = new String[resultLength];
         int j = 0;
-        for (int i = films.length - 1; i >= 0; i--, j++) {
-            feedFilms[j] = films[i];
+        for (int i = movies.length - 1; i >= 0; j++, i--) {
+            result[j] = movies[i];
+            if (countForFeed < movies.length && (movies.length - countForFeed) == i)
+                break;
         }
-        return feedFilms;
+        return result;
+    }
 
+    public Movie[] findAll() {
+        return movies;
     }
-    }
+
+
+}
 
 
 
