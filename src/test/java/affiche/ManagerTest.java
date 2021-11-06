@@ -2,9 +2,6 @@ package affiche;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -17,7 +14,10 @@ class ManagerTest {
     private Movie fifth = new Movie(5, "Invisible man", "Thriller", false);
     private Movie sixth = new Movie(6, "Trolls. Worldwide tour", "Cartoon", true);
     private Movie seventh = new Movie(7, "Number one", "Comedy", true);
-    private Movie nine = new Movie();
+    private Movie nine = new Movie(8,"Cat","Cartoon", true);
+    private Movie tenth = new Movie(9,"Dog","Thriller",true);
+    private Movie eleventh = new Movie(10,"Garden","Action",true);
+    private Movie twelfth = new Movie(11, "Rock","Cartoon",true);
 
 
     @Test
@@ -114,6 +114,59 @@ class ManagerTest {
         Movie[] expected = new Movie[]{nine,fifth, forth, third, second, first};
         assertArrayEquals(actual, expected);
     }
+    @Test
+    public void feedWithLimitMoreThanFilms (){
+        Manager manager = new Manager();
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(forth);
+        manager.add(fifth);
+        manager.add(sixth);
+        manager.add(seventh);
+        manager.add(nine);
+        Movie[] actual = manager.getAll();
+        Movie[] expected = new Movie[]{nine,seventh, sixth, fifth, forth, third, second, first};
+        assertArrayEquals(actual, expected);
+    }
+    @Test
+    public void feedWithLimitLessThanFilms (){
+        Manager manager = new Manager();
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(forth);
+        manager.add(fifth);
+        manager.add(sixth);
+        manager.add(seventh);
+        manager.add(nine);
+        manager.add(tenth);
+        manager.add(eleventh);
+        manager.add(twelfth);
+        Movie[] actual = manager.getAll();
+        Movie[] expected = new Movie[]{twelfth,eleventh, tenth, nine,seventh, sixth, fifth, forth, third, second};
+        assertArrayEquals(actual, expected);
+    }
+    @Test
+    public void feedWithLimitIsEqualToFilms (){
+        Manager manager = new Manager();
+        manager.add(second);
+        manager.add(third);
+        manager.add(forth);
+        manager.add(fifth);
+        manager.add(sixth);
+        manager.add(seventh);
+        manager.add(nine);
+        manager.add(tenth);
+        manager.add(eleventh);
+        manager.add(twelfth);
+        Movie[] actual = manager.getAll();
+        Movie[] expected = new Movie[]{twelfth,eleventh, tenth, nine,seventh, sixth, fifth, forth, third, second};
+        assertArrayEquals(actual, expected);
+    }
+
+
+
 
 
 }

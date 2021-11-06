@@ -13,6 +13,10 @@ public class Manager {
 
     }
 
+    public Movie[] findAll() {
+        return movies;
+    }
+
 
     private Movie[] movies = new Movie[0];
 
@@ -36,10 +40,6 @@ public class Manager {
                 break;
         }
         return result;
-    }
-
-    public Movie[] findAll() {
-        return movies;
     }
 
 
